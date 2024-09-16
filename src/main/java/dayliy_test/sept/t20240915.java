@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Solution {
+class Solution0915 {
 //    前缀和算法
     public int numberOfPoints(List<List<Integer>> nums) {
         int maxEnd = 0;
@@ -35,7 +35,7 @@ public class t20240915 {
         nums.add(Arrays.asList(3, 6));
         nums.add(Arrays.asList(1, 5));
         nums.add(Arrays.asList(4, 7));
-        Solution solution = new Solution();
+        Solution0915 solution = new Solution0915();
         System.out.println(solution.numberOfPoints(nums));
     }
 }
