@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var divide = function(a, b) {
+        const MAX_VALUE = 2 ** 31 - 1, MIN_VALUE = -(2 ** 31);
+        // 考虑被除数为最小值的情况
+        if (a === MIN_VALUE) {
+            if (b === 1) {
+                return MIN_VALUE;
+            }
+            if (b === -1) {
+                return MAX_VALUE;
+            }
+        }
+        // 考虑除数为最小值的情况
+        if (b === MIN_VALUE) {
+            return a === MIN_VALUE ? 1 : 0;
+        }
+        // 考虑被除数为 0 的情况
+        if (a === 0) {
+            return 0;
+        }
+        let rev = true
+        if(a<0){
+            rev = !rev
+            a = -a
+        }
+        if(b<0){
+            rev = !rev
+            b = -b
+        }
+        let left,right
+        if(a===MAX_VALUE){
+            if(b===1)
+                return a
+            right = a
+        }else
+            right = a + 1
+        if(b===MAX_VALUE){
+            return a===MAX_VALUE ? 1 : 0
+        }
+        left = 1
+        let ans = 0
+        while(left<right){
+            mid = (left + right) >> 1
+            let res = check(a,b,mid)
+            if(res===a){
+                ans = mid
+                break
+            }else if(res>a){
+                right = mid
+                if(res-b<a){
+                    ans = mid - 1
+                    break
+                }
+            }else{
+                left = mid + 1
+            }
+        }
+        return rev ? ans : -ans
+    };
+    var check = function(x,y,z){
+        let res = 0
+        for(var i=1;i<=z;i++){
+            res += y
+        }
+        return res
+    }
+    console.log(divide(2**31 - 2,4))
+</script>
+</body>
+</html>
