@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var findMatrix = function(nums){
+        let ans = []
+        let cnt = new Map()
+        const n = nums.length
+        for(let i=0;i<n;i++){
+            if(!cnt.has(nums[i])){
+                if(ans.length===0){
+                    ans.push([])
+                }
+                ans[0].push(nums[i])
+                cnt.set(nums[i],1)
+            }else{
+                let x = cnt.get(nums[i])
+                if(x>=ans.length)
+                    ans.push([])
+                ans[x].push(nums[i])
+                cnt.set(nums[i],cnt.get(nums[i])+1)
+            }
+        }
+        return ans
+    }
+    console.log(findMatrix([1,3,4,1,2,3,1]))
+</script>
+</body>
+</html>
