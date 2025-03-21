@@ -315,7 +315,7 @@ class Solution:
         return ans
 ```
 
-2.16 矩阵旋转——不消耗额外的空间
+## 2.16 矩阵旋转——不消耗额外的空间
 
 - 如果是顺时针旋转，则先对矩阵进行转置，再将转置后的矩阵沿中心对称轴交换列
 - 如果是逆时针旋转，则先对矩阵进行转置，再将转置后的矩阵沿中心对称轴交换行
@@ -339,6 +339,24 @@ public void rotate(int[][] matrix){
                 matrix[i][n-1-j] = temp;
             }
         }
+    }
+```
+
+## 2.17 环形链表找环的入口
+
+```java
+public int findDuplicate(int[] nums){
+        int slow = 0,fast=0;
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while(slow!=fast);
+        slow = 0;
+        while(slow!=fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
 ```
 
