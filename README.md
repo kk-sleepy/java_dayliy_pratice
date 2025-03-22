@@ -360,3 +360,31 @@ public int findDuplicate(int[] nums){
     }
 ```
 
+## 2.18  单调队列
+
+单调队列适用于解决像滑动窗口最大值这样对问题
+
+```java
+public int[] maxSlidingWindow(int[] nums,int k){
+        int n = nums.length;
+        int[] ans = new int[n-k+1];
+        Deque<Integer> dq = new ArrayDeque<>();
+        for(int i=0;i<n;i++){
+            while(!dq.isEmpty()&&nums[i]>=nums[dq.getLast()]){
+                dq.removeLast();
+            }
+            dq.addLast(i);
+            // 2. 出
+            if (i - dq.getFirst() >= k) { // 队首已经离开窗口了
+                dq.removeFirst();
+            }
+            // 3. 记录答案
+            if (i >= k - 1) {
+                // 由于队首到队尾单调递减，所以窗口最大值就是队首
+                ans[i - k + 1] = nums[dq.getFirst()];
+            }
+        }
+        return ans;
+     }
+```
+
