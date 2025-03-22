@@ -1,3 +1,41 @@
+# 1、数据结构——Java
+
+## 1.1 哈希表
+
+```java
+//初始化哈希表,前面是key的类型，后面是value的类型
+Map<Object,Object> map = new HashMap<>();
+
+//返回默认值,如果存在返回value，否则返回默认值
+map.getOrDefault(key,默认值);
+
+//computeIfAbsent,用于判断该哈希表中是否有该key，如果有则执行add加入value，否则加入newValue
+map.computeIfAbsent(key,k->newValue).add(value);
+
+//put，向哈希表中加入key，value
+map.put(key,value);
+    
+//get，获得对应key的value
+map.get(key);
+
+//remove,删除
+map.remove(key);
+
+//size,计算map中有多少元素
+map.size();
+
+//keySet(),获取map中的所有key
+map.keySet();
+
+//values(),获取map中的所有值
+map.values();
+
+//merge(),合并map中相同key的value，合并规则自定义
+map.merge(key,value,Integer::sum);
+```
+
+
+
 # 2、算法
 
 ## 2.1 前缀和
