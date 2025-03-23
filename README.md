@@ -5,6 +5,8 @@
 ```java
 //初始化哈希表,前面是key的类型，后面是value的类型
 Map<Object,Object> map = new HashMap<>();
+//双向链表形式的哈希表
+Map<Object,Object> mapLinked = new LinkedHashMap<>();
 
 //返回默认值,如果存在返回value，否则返回默认值
 map.getOrDefault(key,默认值);
