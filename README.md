@@ -34,6 +34,27 @@ map.values();
 map.merge(key,value,Integer::sum);
 ```
 
+## 1.2 栈
+
+```java
+// 初始化
+Stack<Object> st = new Stack<>();
+
+//查看栈顶元素
+st.peak();
+
+//弹出栈顶元素
+st.pop();
+
+//入栈
+st.push();
+
+//判断栈是否为空
+st.empty() ;
+
+
+```
+
 
 
 # 2、算法
