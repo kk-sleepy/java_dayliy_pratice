@@ -57,6 +57,38 @@ st.empty() ;
 
 ```
 
+## 1.3 String
+
+```java
+//初始化String数组，普通string直接初始化就可以
+String[] s = new String[n];
+
+//查找索引为i的元素
+s.charAt(i);
+
+//判断字符串s，是否是以word为前缀
+s.startsWith(word);
+
+//测试此字符串是否以此后缀为结束
+s.endsWith(word);
+
+//.concat()，可以用来拼接两个字符串，也可以直接用 + 
+s.concat(str2);
+
+//用于将字符串中所有 old 值转换为 new 值。
+str2.replace(old,new);
+
+//返回一个新字符串，范围为原串的[0,n)
+str2.substring(0,n)
+```
+
+1.4 Stream流
+
+```java
+//filter里为函数式当结果为true时执行后续方法，这里执行的是count
+Arrays.stream(words).filter(s::startsWith).count();
+```
+
 
 
 # 2、算法
@@ -447,5 +479,55 @@ public int[] maxSlidingWindow(int[] nums,int k){
         }
         return ans;
      }
+```
+
+## 2.19 trie树
+
+```java
+class Node{
+    Node[] son = new Node[26];
+    boolean end;
+}
+
+class Trie {
+    private Node root;
+    public Trie() {
+        this.root = new Node();
+    }
+
+    public void insert(String word) {
+        Node cur = this.root;
+        for(char c : word.toCharArray()){
+            c -= 'a';
+            if(cur.son[c]==null){
+                cur.son[c] = new Node();
+            }
+            cur = cur.son[c];
+        }
+        cur.end = true;
+    }
+
+    public boolean search(String word) {
+        return find(word) == 2;
+    }
+
+    public boolean startsWith(String prefix) {
+        return find(prefix) > 0;
+    }
+    private int find(String words){
+        Node cur = this.root;
+        for(char c : words.toCharArray()){
+            c -= 'a';
+            if(cur.son[c]!=null){
+                cur = cur.son[c];
+            }else
+                return 0;
+        }
+        if(cur.end)
+            return 2;
+        else
+            return 1;
+    }
+}
 ```
 
