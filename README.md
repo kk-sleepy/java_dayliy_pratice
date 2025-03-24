@@ -34,6 +34,11 @@ map.values();
 
 //merge(),合并map中相同key的value，合并规则自定义
 map.merge(key,value,Integer::sum);
+
+//entry,作为map迭代用的。
+for(Map.Entry<Integer, Integer> entry : cnt.entrySet()){
+    int data = entry.getKey(), count = entry.getValue();
+}
 ```
 
 ## 1.2 栈
@@ -53,8 +58,6 @@ st.push();
 
 //判断栈是否为空
 st.empty() ;
-
-
 ```
 
 ## 1.3 String
@@ -82,11 +85,32 @@ str2.replace(old,new);
 str2.substring(0,n)
 ```
 
-1.4 Stream流
+## 1.4  Stream流
 
 ```java
 //filter里为函数式当结果为true时执行后续方法，这里执行的是count
 Arrays.stream(words).filter(s::startsWith).count();
+```
+
+## 1.5 优先队列（堆）
+
+```java
+//非普通类型的优先队列定义，后面参数为重新定义的比较器
+PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
+    public int compare(int[] m,int[] n){
+        return m[1] - n[1];
+    }
+}
+);
+
+//peek，用于获取堆顶元素
+queue.peek();
+
+//poll,用于弹出堆顶元素，返回堆顶元素的值，与remove类似
+queue.poll();
+
+//offer,向堆中加入新元素，与add相似
+queue.offer(obj);
 ```
 
 
