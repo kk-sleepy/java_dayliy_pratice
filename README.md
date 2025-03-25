@@ -48,7 +48,7 @@ for(Map.Entry<Integer, Integer> entry : cnt.entrySet()){
 Stack<Object> st = new Stack<>();
 
 //查看栈顶元素
-st.peak();
+st.peek();
 
 //弹出栈顶元素
 st.pop();
@@ -551,6 +551,21 @@ class Trie {
             return 2;
         else
             return 1;
+    }
+}
+```
+
+## 2.20 矩阵对角线遍历
+
+```java
+int n = grid.length, m = grid[0].length;
+int[][] ans = new int[n][m];
+for (int len = 1; len < n + m; len++) {
+    int maxj = Math.min(m - 1, m + n - len - 1);
+    int minj = Math.max(0, m - len);
+    for (int j = minj; j <= maxj; j++) {
+        int i = len + j - m;
+        ans[i][j] = grid[i][j];
     }
 }
 ```
