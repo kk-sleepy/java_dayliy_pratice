@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var coinChange = function (coins, amount) {
+        let ans = 0
+        let n = coins.length
+        let dp = Array.from(Array(n+1),() => Array(amount+1).fill(Infinity / 2));
+        dp[0][0] = 0
+        for(let i = 1;i<=n;i++){
+            for(let j=0;j<=amount;j++){
+                if(j<coins[i-1]){
+                    dp[i][j] = dp[i-1][j]
+                }else{
+                    dp[i][j] = Math.min(dp[i-1][j],dp[i][j-coins[i-1]]+1)
+                }
+            }
+        }
+        ans = dp[n][amount]
+        return ans < Infinity / 2 ? ans : -1
+    };
+    console.log(coinChange([1,2,5],11))
+</script>
+</body>
+</html>

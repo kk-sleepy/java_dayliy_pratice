@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var majorityElement = function(nums) {
+        let count = 0
+        let ans = 0
+        for(let i =0;i<nums.length;i++){
+            if(count===0){
+                ans = nums[i]
+            }
+            if(nums[i]===ans){
+                count += 1
+            }else{
+                count -= 1
+            }
+        }
+        return ans
+    };
+    console.log(majorityElement([3,2,3]))
+</script>
+</body>
+</html>
