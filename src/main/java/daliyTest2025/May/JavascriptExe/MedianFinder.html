@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var MedianFinder = function() {
+        this.left = new PriorityQueue((a,b)=>{
+            return b - a
+        })
+        this.right = new PriorityQueue((a,b)=>{
+            return a - b
+        })
+    };
+
+    /**
+     * @param {number} num
+     * @return {void}
+     */
+    MedianFinder.prototype.addNum = function(num) {
+        if(this.left.size()===this.right.size()){
+            this.right.push(num)
+            this.left.push(this.right.pop())
+        }else{
+            this.left.push(num)
+            this.right.push(this.left.pop())
+        }
+    };
+
+    /**
+     * @return {number}
+     */
+    MedianFinder.prototype.findMedian = function() {
+        if(this.left.size()===this.right.size()){
+            return (this.left.front()+this.right.front()) / 2
+        }else{
+            return this.left.front()
+        }
+    };
+    var obj = new MedianFinder()
+    let list = [[], [1], [2], [], [3], []]
+    for(let num of list){
+        if(num.length===1)
+            obj.addNum(num[0])
+    }
+    console.log(obj.findMedian())
+</script>
+</body>
+</html>

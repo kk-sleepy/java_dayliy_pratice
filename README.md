@@ -570,3 +570,26 @@ for (int len = 1; len < n + m; len++) {
 }
 ```
 
+2.21 快慢指针找入环点
+
+![图解环形链表](https://gitee.com/w1610-8966-46/my-pictures/raw/master/my-pictures/20250328130853184.png)
+
+```js
+var detectCycle = function(head) {
+    let quick = head
+    let slow = head
+    while(quick&&quick.next){
+        slow = slow.next
+        quick = quick.next.next
+        if(slow===quick){
+            while(slow!==head){
+                head = head.next
+                slow = slow.next
+            }
+            return slow
+        }
+    }
+    return null
+};
+```
+
