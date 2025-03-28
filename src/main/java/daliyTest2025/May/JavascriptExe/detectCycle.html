@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    const buildLink = (nums) =>{
+        let head = new ListNode(nums[0])
+        let cur = head
+        for(let i =1;i<nums.length;i++){
+            cur.next = new ListNode(nums[i])
+            cur = cur.next
+        }
+        return head
+    }
+    let head = buildLink([3,2,0,-4])
+    head.next.next.next.next = head.next
+    var detectCycle = function(head) {
+        let quick = head
+        let slow = head
+        while(quick&&quick.next){
+            slow = slow.next
+            quick = quick.next.next
+            if(slow===quick){
+                while(slow!==head){
+                    head = head.next
+                    slow = slow.next
+                }
+                return slow
+            }
+        }
+        return null
+    };
+    console.log(detectCycle(head))
+</script>
+</body>
+</html>
