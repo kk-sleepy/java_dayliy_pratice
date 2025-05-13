@@ -19,6 +19,8 @@ class TreeNode {
         this.left = left;
         this.right = right;
     }
+}
+public class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
         Queue<TreeNode> queue = new ArrayDeque<>();
@@ -40,6 +42,4 @@ class TreeNode {
         }
         return ans;
     }
-}
-public class Solution {
 }
