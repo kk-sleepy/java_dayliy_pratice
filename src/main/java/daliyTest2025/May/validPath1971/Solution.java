@@ -2,28 +2,24 @@ package daliyTest2025.May.validPath1971;
 
 import java.util.*;
 class Solution {
+    int[]parents;
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-        List<Integer>[] adj = new List[n];
-        for(int i = 0;i<n;i++){
-            adj[i] = new ArrayList<>();
+        parents = new int[n];
+        for(int i=0;i<n;i++){
+            parents[i] = i;
         }
-        for(int[] data : edges){
-            adj[data[0]].add(data[1]);
-            adj[data[1]].add(data[0]);
+        for(int[] edge : edges){
+            merge(edge[0],edge[1]);
         }
-        boolean[] vis = new boolean[n];
-        Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(source);
-        vis[source] = true;
-        while(!queue.isEmpty()){
-            int x = queue.poll();
-            for(Integer j : adj[x]){
-                if(!vis[j]) {
-                    vis[j] = true;
-                    queue.offer(j);
-                }
-            }
+        return find(source) == find(destination);
+    }
+    int find(int x){
+        if(x != parents[x]){
+            parents[x] = find(parents[x]);
         }
-        return vis[destination];
+        return parents[x];
+    }
+    void merge(int x,int y){
+        parents[find(x)] = find(y);
     }
 }
