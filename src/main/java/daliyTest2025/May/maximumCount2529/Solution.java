@@ -6,10 +6,7 @@ class Solution {
         int sum1 = 0,sum2 = 0;
         int x = search(nums,1);
         sum2 = n - x;
-        x -= 1;
-        while(x>=0 && nums[x] == 0)
-            x -= 1;
-        sum1 = x+1;
+        sum1 = search(nums,0);
         return Math.max(sum1,sum2);
     }
     int search(int[] nums,int target){
@@ -28,6 +25,6 @@ class Solution {
     public static void main(String[] args) {
         int[] nums = new int[]{0,0,0,0,0,0};
         Solution s = new Solution();
-        s.maximumCount(nums);
+        System.out.println(s.maximumCount(nums));
     }
 }
