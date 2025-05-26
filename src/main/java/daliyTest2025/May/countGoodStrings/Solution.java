@@ -3,49 +3,29 @@ package daliyTest2025.May.countGoodStrings;
 import java.util.Arrays;
 
 class Solution {
-    int zero;
-    int one;
-    int[] memo;
+    private static final int mod = 1_000_000_000 + 7;
     public int countGoodStrings(int low, int high, int zero, int one) {
-        int mod = 1_000_000_000 + 7;
-        memo = new int[high+1];
-        Arrays.fill(memo,-1);
-        this.zero = zero;
-        this.one = one;
-        int mins = Math.min(zero,one);
-        int maxs = Math.min(zero,one);
-        memo[mins] = 1;
-        for(int i = mins;i<=maxs;i++){
-            if(i%mins==0){
-                memo[i] = 1;
-            }
-        }
-        memo[maxs] += 1;
+        int[] dp = new int[high+1];
+        dp[0] = 1;
         int ans = 0;
+        for(int i = 1;i<=high;i++){
+            int sum0 = 0, sum1 = 0;
+            if(i>=zero){
+                sum0 = dp[i-zero];
+            }
+            if(i>=one){
+                sum1 = dp[i-one];
+            }
+            dp[i] = (sum1 + sum0) % mod;
+        }
         for(int i = low;i<=high;i++){
-            ans += dfs(i);
+            ans = (ans + dp[i]) % mod;
         }
         return ans;
-    }
-    int dfs(int i){
-        if(i <= 0){
-            return 0;
-        }
-        if(memo[i]!=-1){
-            return memo[i];
-        }
-        int sum1 = 0, sum0 = 0;
-        if(i >= zero){
-            sum0 = dfs(i-zero);
-        }
-        if(i >= one){
-            sum1 = dfs(i-one);
-        }
-        return memo[i] = sum0 + sum1;
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.countGoodStrings(3,3,1,1));
+        System.out.println(s.countGoodStrings(2,3,1,2));
     }
 }
