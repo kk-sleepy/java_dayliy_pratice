@@ -3,33 +3,27 @@ package daliyTest2025.June.numberOfWays;
 import java.util.Arrays;
 
 class Solution {
-    int[][] memo;
     int m;
     int mod = 1_000_000_000 + 7;
     public int numberOfWays(int n, int x) {
         m = (int)Math.pow(n,1.0/x) + 1;
-        memo = new int[m+1][n+1];
-        for(int i = 0;i<=m;i++){
-            Arrays.fill(memo[i],-1);
+        int[][] dp = new int[m+1][n+1];
+        dp[0][0] = 1;
+        for(int i = 1;i<=m;i++){
+            for(int j = 0;j<=n;j++){
+                int temp = (int)Math.pow(i,x);
+                if(j < temp){
+                    dp[i][j] = dp[i-1][j];
+                }else{
+                    dp[i][j] = (dp[i-1][j] + dp[i-1][j-temp]) % mod;
+                }
+            }
         }
-        return dfs(m,n,x);
-    }
-    int dfs(int i,int target,int x){
-        if(i <= 0){
-            return target == 0 ? 1 : 0;
-        }
-        if(memo[i][target] != -1)
-            return memo[i][target];
-        int temp = (int)Math.pow(i,x);
-        if(temp > target){
-            return memo[i][target] = dfs(i-1,target,x);
-        }
-
-        return memo[i][target] = (dfs(i-1,target-temp,x) + dfs(i-1,target,x)) % mod;
+        return dp[m][n];
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.numberOfWays(10,2));
+        System.out.println(s.numberOfWays(4,1));
     }
 }
